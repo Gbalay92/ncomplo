@@ -8,10 +8,11 @@ import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 import com.sendgrid.helpers.mail.objects.Personalization;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.jgayoso.ncomplo.business.entities.ForgotPasswordToken;
 import org.jgayoso.ncomplo.business.entities.Invitation;
 import org.jgayoso.ncomplo.business.entities.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -24,7 +25,7 @@ import org.thymeleaf.context.Context;
 @Service
 public class SendGridEmailService implements EmailService {
 
-	private static final Logger logger = Logger.getLogger(SendGridEmailService.class);
+	private static final Logger logger = LoggerFactory.getLogger(SendGridEmailService.class);
 
 	@Value("${ncomplo.server.url}")
     private String baseUrl;
@@ -186,6 +187,6 @@ public class SendGridEmailService implements EmailService {
 		Response response = this.sendGrid.api(request);
 		logger.info("Response code " + response.getStatusCode());
 		logger.info(response.getBody());
-		logger.info(response.getHeaders());
+		logger.info(String.valueOf(response.getHeaders()));
 	}
 }

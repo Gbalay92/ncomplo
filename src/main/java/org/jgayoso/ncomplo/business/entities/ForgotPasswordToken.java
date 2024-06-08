@@ -1,6 +1,6 @@
 package org.jgayoso.ncomplo.business.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "FORGOT_PASSWORD_TOKEN")

@@ -60,7 +60,7 @@ public class BetService {
     
     
     public Bet find(final Integer id) {
-        return this.betRepository.findOne(id);
+        return this.betRepository.findById(id).orElse(null);
     }
     
     public List<Bet> findByLeagueIdAndUserLogin(
@@ -90,7 +90,7 @@ public class BetService {
 
             List<League> leaguesToUpdate;
             if (updateAllLeagues) {
-                final User user = this.userRepository.findOne(login);
+                final User user = this.userRepository.findByEmail(login);
                 if (user == null) {
                     throw new InternalErrorException("User " + login + " not found");
                 }
@@ -204,19 +204,16 @@ public class BetService {
             final Integer scoreB) {
 
         final League league = 
-                this.leagueRepository.findOne(leagueId);
+                this.leagueRepository.findById(leagueId).orElse(null);
         final User user = 
-                this.userRepository.findOne(login);
+                this.userRepository.findById(login).orElse(null);
         final Game game = 
-                this.gameRepository.findOne(gameId);
+                this.gameRepository.findById(gameId).orElse(null);
         
-        final GameSide gameSideA = 
-                (gameSideAId == null? null : this.gameSideRepository.findOne(gameSideAId));
-        final GameSide gameSideB = 
-                (gameSideBId == null? null : this.gameSideRepository.findOne(gameSideBId));
+        final GameSide gameSideA =  this.gameSideRepository.findById(gameSideAId).orElse(null);
+        final GameSide gameSideB = this.gameSideRepository.findById(gameSideBId).orElse(null);
         
-        final Bet bet =
-                (id == null? new Bet() : this.betRepository.findOne(id));
+        final Bet bet = this.betRepository.findById(id).orElse(new Bet());
 
         bet.setLeague(league);
         bet.setGame(game);
@@ -237,7 +234,7 @@ public class BetService {
     
     @Transactional
     public void delete(final Integer betId) {
-        this.betRepository.delete(betId);
+        this.betRepository.deleteById(betId);
     }
 
     

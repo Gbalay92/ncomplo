@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.jgayoso.ncomplo.business.entities.Bet;
 import org.jgayoso.ncomplo.business.entities.Bet.BetComparator;
 import org.jgayoso.ncomplo.business.entities.League;
@@ -201,7 +201,7 @@ public class ScoreboardController {
 
 	@RequestMapping(value = { "/downloadbets/{leagueId}/{login}" })
 	public void downloadbets(@PathVariable("leagueId") final Integer leagueId, @PathVariable("login") final String login,
-			 final HttpServletRequest request, HttpServletResponse response, final RedirectAttributes redirectAttributes) throws IOException {
+							 final HttpServletRequest request, HttpServletResponse response, final RedirectAttributes redirectAttributes) throws IOException {
 
 		final Locale locale = RequestContextUtils.getLocale(request);
 

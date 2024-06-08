@@ -47,7 +47,7 @@ public class LeagueService {
 
 	@Transactional
 	public League find(final Integer id) {
-		return this.leagueRepository.findOne(id);
+		return this.leagueRepository.findById(id).orElse(null);
 	}
 
 	@Transactional
@@ -79,9 +79,9 @@ public class LeagueService {
 			final Map<String, String> namesByLang, final String adminEmail, final boolean active,
 			final Date betsDeadLine, final Map<Integer, Integer> betTypesByGame) {
 
-		final Competition competition = this.competitionRepository.findOne(competitionId);
+		final Competition competition = this.competitionRepository.findById(competitionId).orElse(null);
 
-		final League league = (id == null ? new League() : this.leagueRepository.findOne(id));
+		final League league = this.leagueRepository.findById(id).orElse(new League());
 
 		league.setCompetition(competition);
 		league.setName(name);
@@ -97,8 +97,8 @@ public class LeagueService {
 			final Integer gameId = betTypesByGameEntry.getKey();
 			final Integer betTypeId = betTypesByGameEntry.getValue();
 
-			final Game game = this.gameRepository.findOne(gameId);
-			final BetType betType = this.betTypeRepository.findOne(betTypeId);
+			final Game game = this.gameRepository.findById(gameId).orElse(null);
+			final BetType betType = this.betTypeRepository.findById(betTypeId).orElse(null);
 
 			final LeagueGame leagueGame = new LeagueGame();
 			leagueGame.setBetType(betType);
@@ -118,18 +118,18 @@ public class LeagueService {
 
 	@Transactional
 	public void delete(final Integer leagueId) {
-		final League league = this.leagueRepository.findOne(leagueId);
+		final League league = this.leagueRepository.findById(leagueId).orElse(null);
 		if (league == null) {
 			return;
 		}
 		invitationRepository.deleteByLeagueId(leagueId);
-		this.leagueRepository.delete(leagueId);
+		this.leagueRepository.deleteById(leagueId);
 	}
 
 	@Transactional
 	public void recomputeScores(final Integer leagueId) {
 
-		final League league = this.leagueRepository.findOne(leagueId);
+		final League league = this.leagueRepository.findById(leagueId).orElse(new League());
 
 		for (final User participant : league.getParticipants()) {
 			final List<Bet> bets = this.betRepository.findByLeagueIdAndUserLogin(league.getId(),
@@ -143,7 +143,7 @@ public class LeagueService {
 	@Transactional
 	public void recomputeScoresForGames(final Integer leagueId, final Collection<Game> games) {
 
-		final League league = this.leagueRepository.findOne(leagueId);
+		final League league = this.leagueRepository.findById(leagueId).orElse(new League());
 
 		for (final User participant : league.getParticipants()) {
 			final List<Bet> bets = this.betRepository.findByLeagueIdAndUserLoginAndGameIn(league.getId(),
@@ -256,7 +256,7 @@ public class LeagueService {
 	}
 	
 	public void sendNotificationEmailToLeagueMembers(final Integer leagueId, final String subject, final String text) {
-		final League league = this.leagueRepository.findOne(leagueId);
+		final League league = this.leagueRepository.findById(leagueId).orElse(new League());
 
 		EmailService emailService = emailServiceFactory.getEmailService();
 		if (emailService == null) {

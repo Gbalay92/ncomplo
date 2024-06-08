@@ -2,12 +2,13 @@ package org.jgayoso.ncomplo.business.services;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
 import org.jgayoso.ncomplo.business.entities.*;
 import org.jgayoso.ncomplo.business.entities.repositories.CompetitionParserPropertiesRepository;
 import org.jgayoso.ncomplo.business.entities.repositories.CompetitionRepository;
 import org.jgayoso.ncomplo.business.util.I18nNamedEntityComparator;
 import org.jgayoso.ncomplo.business.util.IterableUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CompetitionService {
 
-    private static final Logger logger = Logger.getLogger(CompetitionService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CompetitionService.class);
 
 
     @Autowired
@@ -45,7 +46,7 @@ public class CompetitionService {
     
     @Transactional
     public Competition find(final Integer id) {
-        return this.competitionRepository.findOne(id);
+        return this.competitionRepository.findById(id).orElse(null);
     }
     
     
@@ -65,8 +66,7 @@ public class CompetitionService {
 			final boolean active, final String updaterUri,
             final CompetitionParserProperties competitionParserProperties) {
         
-        final Competition competition =
-                (id == null? new Competition() : this.competitionRepository.findOne(id));
+        final Competition competition = this.competitionRepository.findById(id).orElse(new Competition());
 
         competition.setName(name);
         competition.getNamesByLang().clear();
@@ -90,7 +90,7 @@ public class CompetitionService {
     
     @Transactional
     public void delete(final Integer competitionId) {
-        this.competitionRepository.delete(competitionId);
+        this.competitionRepository.deleteById(competitionId);
     }
 
 }

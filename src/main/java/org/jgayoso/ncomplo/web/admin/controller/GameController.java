@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.jgayoso.ncomplo.business.entities.Game;
 import org.jgayoso.ncomplo.business.services.BetTypeService;
@@ -82,7 +82,7 @@ public class GameController {
     @RequestMapping("/list")
     public String list(
             @PathVariable("competitionId") final Integer competitionId, 
-            final HttpServletRequest request, 
+            final HttpServletRequest request,
             final ModelMap model) {
         
         final List<Game> games =

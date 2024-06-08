@@ -2,8 +2,8 @@ package org.jgayoso.ncomplo.web.admin.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.jgayoso.ncomplo.business.entities.Competition;
 import org.jgayoso.ncomplo.business.entities.CompetitionParserProperties;
 import org.jgayoso.ncomplo.business.services.CompetitionService;

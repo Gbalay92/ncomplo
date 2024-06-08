@@ -1,9 +1,10 @@
 package org.jgayoso.ncomplo.web.admin.beans;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class UserInvitationBean implements Serializable {
 	

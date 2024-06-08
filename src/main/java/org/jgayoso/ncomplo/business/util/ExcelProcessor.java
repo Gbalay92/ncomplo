@@ -3,7 +3,6 @@ package org.jgayoso.ncomplo.business.util;
 import com.neovisionaries.i18n.CountryCode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -16,6 +15,8 @@ import org.jgayoso.ncomplo.business.services.GameService;
 import org.jgayoso.ncomplo.business.services.GameSideService;
 import org.jgayoso.ncomplo.business.views.BetView;
 import org.jgayoso.ncomplo.exceptions.CompetitionParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,7 +24,7 @@ import java.util.*;
 
 public class ExcelProcessor {
 
-    private static final Logger logger = Logger.getLogger(ExcelProcessor.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExcelProcessor.class);
 
     public static int processGroupGamesBets(Integer leagueId, String login, Competition competition, XSSFSheet sheet,
         Map<Integer, Game> gamesByOrder, Map<Integer, Integer> betIdsByGameId, Map<Integer, BetView> betsByGameId, BetService betService) {

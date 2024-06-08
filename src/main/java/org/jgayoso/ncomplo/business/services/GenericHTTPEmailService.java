@@ -10,10 +10,11 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.log4j.Logger;
 import org.jgayoso.ncomplo.business.entities.ForgotPasswordToken;
 import org.jgayoso.ncomplo.business.entities.Invitation;
 import org.jgayoso.ncomplo.business.entities.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,13 @@ import org.thymeleaf.context.Context;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service
 public class GenericHTTPEmailService implements EmailService {
 
-    private static final Logger logger = Logger.getLogger(GenericHTTPEmailService.class);
+    private static final Logger logger = LoggerFactory.getLogger(GenericHTTPEmailService.class);
 
     private static final String NEW_PASSWORD_SUBJECT = "Your new NComplo password";
     private static final String RESTORE_PASSWORD_SUBJECT = "Restore you NComplo password";

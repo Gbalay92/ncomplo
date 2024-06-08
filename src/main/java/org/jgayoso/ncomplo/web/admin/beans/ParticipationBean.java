@@ -1,10 +1,11 @@
 package org.jgayoso.ncomplo.web.admin.beans;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.validation.constraints.NotNull;
 
 
 public class ParticipationBean implements Serializable {

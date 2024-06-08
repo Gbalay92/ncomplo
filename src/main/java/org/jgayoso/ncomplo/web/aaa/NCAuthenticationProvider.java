@@ -2,10 +2,11 @@ package org.jgayoso.ncomplo.web.aaa;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
 import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.jasypt.util.password.PasswordEncryptor;
 import org.jgayoso.ncomplo.business.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class NCAuthenticationProvider implements AuthenticationProvider {
 
-    private static final Logger logger = Logger.getLogger(NCAuthenticationProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(NCAuthenticationProvider.class);
 
     @Autowired
     private PasswordEncryptor passwordEncryptor;

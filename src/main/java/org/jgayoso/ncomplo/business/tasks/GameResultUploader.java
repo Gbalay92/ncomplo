@@ -9,7 +9,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.log4j.Logger;
 import org.jgayoso.ncomplo.business.entities.Competition;
 import org.jgayoso.ncomplo.business.entities.Game;
 import org.jgayoso.ncomplo.business.entities.League;
@@ -18,6 +17,8 @@ import org.jgayoso.ncomplo.business.entities.repositories.GameRepository;
 import org.jgayoso.ncomplo.business.entities.repositories.LeagueRepository;
 import org.jgayoso.ncomplo.business.services.LeagueService;
 import org.jgayoso.ncomplo.business.tasks.vo.MatchVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,7 +29,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class GameResultUploader {
 	
-	private static final Logger logger = Logger.getLogger(GameResultUploader.class);
+	private static final Logger logger = LoggerFactory.getLogger(GameResultUploader.class);
 	private static final RestTemplate restTemplate = new RestTemplate(); 
 	
 	@Autowired

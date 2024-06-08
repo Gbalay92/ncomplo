@@ -1,14 +1,10 @@
 package org.jgayoso.ncomplo.web.admin.beans;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.StringUtils;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 public class LeagueBean implements Serializable {

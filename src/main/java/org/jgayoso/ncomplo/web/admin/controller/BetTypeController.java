@@ -2,10 +2,9 @@ package org.jgayoso.ncomplo.web.admin.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.jgayoso.ncomplo.business.entities.BetType;
-import org.jgayoso.ncomplo.business.entities.Competition;
 import org.jgayoso.ncomplo.business.services.BetTypeService;
 import org.jgayoso.ncomplo.business.services.CompetitionService;
 import org.jgayoso.ncomplo.web.admin.beans.BetTypeBean;
@@ -39,7 +38,7 @@ public class BetTypeController {
     @RequestMapping("/list")
     public String list(
             @PathVariable("competitionId") final Integer competitionId, 
-            final HttpServletRequest request, 
+            final HttpServletRequest request,
             final ModelMap model) {
         
         final List<BetType> betTypes =

@@ -7,7 +7,6 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -21,6 +20,8 @@ import org.jgayoso.ncomplo.business.entities.repositories.RoundRepository;
 import org.jgayoso.ncomplo.business.util.ExcelProcessor;
 import org.jgayoso.ncomplo.business.util.IterableUtils;
 import org.jgayoso.ncomplo.exceptions.CompetitionParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ import org.springframework.util.CollectionUtils;
 @Service
 public class GameService {
 
-    private static final Logger logger = Logger.getLogger(GameService.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameService.class);
     
     @Autowired
     private CompetitionRepository competitionRepository;
@@ -65,7 +66,7 @@ public class GameService {
 
     @Transactional
     public Game find(final Integer id) {
-        return this.gameRepository.findOne(id);
+        return this.gameRepository.findById(id).orElse(null);
     }
     
     
@@ -94,23 +95,21 @@ public class GameService {
             final Integer scoreB) {
 
         final Competition competition = 
-                this.competitionRepository.findOne(competitionId);
+                this.competitionRepository.findById(competitionId).orElseThrow();
 
         final Game game =
-                (id == null? new Game() : this.gameRepository.findOne(id));
+                (id == null? new Game() : this.gameRepository.findById(id).orElseThrow());
         
-        final GameSide gameSideA = 
-                (gameSideAId == null? null : this.gameSideRepository.findOne(gameSideAId));
-        final GameSide gameSideB = 
-                (gameSideBId == null? null : this.gameSideRepository.findOne(gameSideBId));
+        final GameSide gameSideA =  this.gameSideRepository.findById(gameSideAId).orElse(null);
+        final GameSide gameSideB = this.gameSideRepository.findById(gameSideBId).orElse(null);
         
         game.setCompetition(competition);
         game.setDate(date);
         game.setName(name);
         game.getNamesByLang().clear();
         game.getNamesByLang().putAll(namesByLang);
-        game.setDefaultBetType(this.betTypeRepository.findOne(defaultBetTypeId));
-        game.setRound(this.roundRepository.findOne(roundId));
+        game.setDefaultBetType(this.betTypeRepository.findById(defaultBetTypeId).orElseThrow());
+        game.setRound(this.roundRepository.findById(roundId).orElseThrow());
         game.setOrder(order);
         game.setGameSideA(gameSideA);
         game.setGameSideB(gameSideB);
@@ -128,7 +127,7 @@ public class GameService {
 
     @Transactional
     public void deleteAll(Integer competitionId) {
-        final Competition competition = this.competitionRepository.findOne(competitionId);
+        final Competition competition = this.competitionRepository.findById(competitionId).orElse(new Competition());
         for (Game game: new HashSet<>(competition.getGames())) {
             competition.getGames().remove(game);
         }
@@ -138,7 +137,7 @@ public class GameService {
     public void delete(final Integer gameId) {
         
         final Game game = 
-                this.gameRepository.findOne(gameId);
+                this.gameRepository.findById(gameId).orElseThrow();
         final Competition competition = game.getCompetition();
         
         competition.getGames().remove(game);
@@ -177,7 +176,7 @@ public class GameService {
 
     @Transactional
     public void processFile(Integer competitionId, String login, File competitionFile) throws CompetitionParserException {
-        final Competition competition = this.competitionRepository.findOne(competitionId);
+        final Competition competition = this.competitionRepository.findById(competitionId).orElse(new Competition());
         CompetitionParserProperties competitionParserProperties = competition.getCompetitionParserProperties();
         if (competitionParserProperties == null) {
             logger.error("Not possible to processFile, competition properties not found");

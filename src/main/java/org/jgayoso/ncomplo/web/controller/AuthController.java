@@ -1,7 +1,6 @@
 package org.jgayoso.ncomplo.web.controller;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.jgayoso.ncomplo.business.entities.ForgotPasswordToken;
 import org.jgayoso.ncomplo.business.entities.Invitation;
 import org.jgayoso.ncomplo.business.entities.User;
@@ -11,6 +10,8 @@ import org.jgayoso.ncomplo.exceptions.InvalidLoginException;
 import org.jgayoso.ncomplo.exceptions.LeagueClosedException;
 import org.jgayoso.ncomplo.web.admin.beans.UserInvitationBean;
 import org.jgayoso.ncomplo.web.beans.ResetPasswordBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class AuthController {
 
-	private static final Logger logger = Logger.getLogger(AuthController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
 	@Autowired
 	private UserService userService;

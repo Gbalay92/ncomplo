@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.jgayoso.ncomplo.business.entities.Competition;
 import org.jgayoso.ncomplo.business.entities.Game;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface GameRepository extends PagingAndSortingRepository<Game,Integer> {
+public interface GameRepository extends JpaRepository<Game, Integer> {
     
     public List<Game> findByCompetitionId(final Integer competitionId);
     

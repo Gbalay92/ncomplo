@@ -4,21 +4,10 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
+import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.jgayoso.ncomplo.business.util.I18nUtils;
 
 
@@ -45,7 +34,7 @@ public class BetType implements I18nNamedEntity {
     
     @Column(name="SPEC",nullable=false)
     @Lob
-    @Type(type="org.hibernate.type.StringClobType")
+    @JdbcTypeCode(SqlTypes.CLOB)
     private String spec;
     
     

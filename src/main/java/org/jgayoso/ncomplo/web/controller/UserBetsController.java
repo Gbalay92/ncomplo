@@ -9,10 +9,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.log4j.Logger;
 import org.jgayoso.ncomplo.business.entities.Bet;
 import org.jgayoso.ncomplo.business.entities.Competition;
 import org.jgayoso.ncomplo.business.entities.Game;
@@ -25,6 +24,8 @@ import org.jgayoso.ncomplo.business.services.*;
 import org.jgayoso.ncomplo.business.util.I18nNamedEntityComparator;
 import org.jgayoso.ncomplo.web.admin.beans.BetBean;
 import org.jgayoso.ncomplo.web.admin.beans.ParticipationBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,7 +43,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 @Controller
 public class UserBetsController {
 	
-	private static final Logger logger = Logger.getLogger(UserBetsController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserBetsController.class);
 	
     @Autowired
     private LeagueService leagueService;

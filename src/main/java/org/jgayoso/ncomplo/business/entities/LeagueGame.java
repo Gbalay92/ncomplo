@@ -3,14 +3,14 @@ package org.jgayoso.ncomplo.business.entities;
 import java.util.Comparator;
 import java.util.Locale;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import org.jgayoso.ncomplo.business.entities.Game.GameComparator;
 import org.jgayoso.ncomplo.business.util.I18nNamedEntityComparator;

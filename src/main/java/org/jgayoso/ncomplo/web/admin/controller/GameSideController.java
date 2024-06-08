@@ -1,12 +1,11 @@
 package org.jgayoso.ncomplo.web.admin.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.jgayoso.ncomplo.business.entities.GameSide;
 import org.jgayoso.ncomplo.business.services.CompetitionService;
 import org.jgayoso.ncomplo.business.services.GameSideService;
@@ -57,7 +56,7 @@ public class GameSideController {
     @RequestMapping("/list")
     public String list(
             @PathVariable("competitionId") final Integer competitionId, 
-            final HttpServletRequest request, 
+            final HttpServletRequest request,
             final ModelMap model) {
         
         final List<GameSide> gameSides =

@@ -1,6 +1,7 @@
 package org.jgayoso.ncomplo.business.services;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceFactory {
 
-    private static final Logger logger = Logger.getLogger(EmailServiceFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(EmailServiceFactory.class);
 
     @Value("${ncomplo.email.sendgrid.enabled}")
     private boolean sendgridEnabled;

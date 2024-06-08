@@ -3,9 +3,10 @@ package org.jgayoso.ncomplo.business.entities.repositories;
 import java.util.List;
 
 import org.jgayoso.ncomplo.business.entities.Invitation;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface InvitationRepository extends PagingAndSortingRepository<Invitation, Integer> {
+public interface InvitationRepository extends JpaRepository<Invitation, Integer> {
 
 	public List<Invitation> findByLeagueId(final Integer leagueId);
 
